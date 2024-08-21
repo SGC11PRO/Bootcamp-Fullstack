@@ -54,6 +54,8 @@ const App = () => {
             <p><strong>Error</strong> - Inspeccione la consola para mas informacion</p>
             </>
         )
+
+        aprovecha el bug de github
     }
 
     else // en el caso de que pueda acceder al metodo map, que lo renderize
