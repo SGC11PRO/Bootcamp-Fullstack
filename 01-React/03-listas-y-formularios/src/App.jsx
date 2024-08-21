@@ -53,7 +53,7 @@ const App = () => {
             <>
             <p><strong>Error</strong> - Inspeccione la consola para mas informacion</p>
             </>
-        )
+        )s
     }
 
     else // en el caso de que pueda acceder al metodo map, que lo renderize
