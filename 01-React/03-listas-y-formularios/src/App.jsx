@@ -55,7 +55,6 @@ const App = () => {
             </>
         )
 
-        aprovecha el bug de github
     }
 
     else // en el caso de que pueda acceder al metodo map, que lo renderize
