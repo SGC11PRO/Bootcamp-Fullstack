@@ -1,4 +1,5 @@
 import React from "react" // importante importar para poder exportar el componente
+import Formulario from "./Formulario"
 
 
 const App = () => {
@@ -65,6 +66,7 @@ const App = () => {
             // usamos el metodo map para poder renderizar objetos (array de obj -> coleccion), y le pasamos como parametro una funcion
             <>
             {notes.map(ReturnArrayOfObj)}
+            <Formulario notes={notes}/>
             </>
         )
     }
