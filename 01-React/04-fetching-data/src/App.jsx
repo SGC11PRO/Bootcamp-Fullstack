@@ -3,6 +3,8 @@ import React from 'react'
 import axios from 'axios' // similar a metodo fetch
 
 import { Note } from './Note'
+import { getAllNotes } from './services/getAllNotes'
+import { createNote } from './services/createNote'
 
 export default function App(props) {
   const [notes, setNotes] = useState([])
@@ -16,20 +18,10 @@ export default function App(props) {
     console.log('use effect ha sido llamado')
 
     setTimeout(() => {
-      /*
-      fetch('https://jsonplaceholder.typicode.com/posts') // IMPORTANTE LOS FETCH SOLO LLAMARLOS 1 VEZ PARA EVITAR BUCLES INFINITOS
-      .then(response => response.json()) // transforma la respuesta en un array json
-        .then((json) => { // pasa el array a notes
 
-          setNotes(json)
-        })
-        
-      */
-
-        axios
-          .get('https://jsonplaceholder.typicode.com/posts')
-          .then((response) => {
-            const {data} = response // unicamente nos interesa el atributo 'data' que es donde se encuentran los obj de la API
+        // accede a nuestro modulo que realiza el axios.get de la API y nos devuelve la response.data
+        getAllNotes()
+          .then((data) => {
             setNotes(data)
           })
 
@@ -50,13 +42,9 @@ export default function App(props) {
     }
 
     // modificar API y guardar nueva nota en el servidor -> .POST
-    axios
-      .post('https://jsonplaceholder.typicode.com/posts', noteToAddState)
-      .then(response => {
-        const {data} = response
-        setNotes((prevNotes) => prevNotes.concat(data))
-
-      })
+    createNote(noteToAddState).then((newNote) => {
+      setNotes((prevNotes) => prevNotes.concat(newNote))
+    })
 
     setNewNote('')
   }
