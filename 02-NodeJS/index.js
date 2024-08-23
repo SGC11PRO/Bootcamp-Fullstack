@@ -12,29 +12,30 @@ setTimeout(() => {
 const express = require('express')
 const app = express()
 
-app.use(express.json()) // usar modulo para las request
+app.use(express.json()) // usar modulo para las request // middleware -> intercepta la peticion que pasa por tu API
 
 
 let notes = [
+
     {
-        "id": 1,
-        "content": "Suscribirse a @midudev",
-        "date": "2024-08-12T12:18:54.091Z",
-        "important": true
+        id: 1,
+        content: "Suscribirse a @midudev",
+        date: "2024-08-12T12:18:54.091Z",
+        important: true
     },
 
     {
-        "id": 2,
-        "content": "Aprender a crear una API",
-        "date": "2024-08-23T09:16:19.092Z",
-        "important": false
+        id: 2,
+        content: "Aprender a crear una API",
+        date: "2024-08-23T09:16:19.092Z",
+        important: false
     },
 
     {
-        "id": 3,
-        "content": "Terminar App de Technoterra",
-        "date": "2024-09-10T20:00:00.091Z",
-        "important": false
+        id: 3,
+        content: "Terminar App de Technoterra",
+        date: "2024-09-10T20:00:00.091Z",
+        important: false
     }
 ]
 
@@ -117,9 +118,17 @@ app.post('/api/notes', (request, response) => {
 
 })
 
+// si no entra en ninguna de las rutas anteriores, entra en el 404 endpoint
+app.use((request, response) => {
+    response.status(404).json({
+        error: `No se puede alcanzar la ruta especificada : ${request.path}`,
+    })
+})
+
 
 
 const PORT = 3001 // especificamos puerto
+
 app.listen(PORT, () => {
     console.warn(`[-] Server Running on port : ${PORT}`)
 }) // decimos a la app(http.createServer()) que escuche con el puerto 3001

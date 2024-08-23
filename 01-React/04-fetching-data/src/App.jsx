@@ -1,12 +1,10 @@
-import { useState, useEffect, useDeferredValue } from 'react'
-import React from 'react'
-import axios from 'axios' // similar a metodo fetch
+import { useState, useEffect } from 'react'
 
 import { Note } from './Note'
 import { getAllNotes } from './services/getAllNotes'
 import { createNote } from './services/createNote'
 
-export default function App(props) {
+export default function App() {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
 
