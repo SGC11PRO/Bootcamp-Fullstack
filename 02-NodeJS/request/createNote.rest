@@ -1,0 +1,23 @@
+POST http://localhost:3001/api/notes 
+Content-Type: application/json 
+// especificar el tipo de contenido : [!] IMPORTANTE -> El Content-Type tiene que ir justo debajo de la petición 'POST'
+
+// este es el objeto a enviar
+
+{
+    "content": "Nueva Nota"
+}
+
+###
+
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "content": "Nota Importante",
+    "important": true
+}
+
+### 
+POST http://localhost:3001/api/notes
+Content-Type: application/json

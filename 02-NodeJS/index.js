@@ -12,24 +12,26 @@ setTimeout(() => {
 const express = require('express')
 const app = express()
 
+app.use(express.json()) // usar modulo para las request
+
 
 let notes = [
     {
-        "id": 0,
+        "id": 1,
         "content": "Suscribirse a @midudev",
         "date": "2024-08-12T12:18:54.091Z",
         "important": true
     },
 
     {
-        "id": 1,
+        "id": 2,
         "content": "Aprender a crear una API",
         "date": "2024-08-23T09:16:19.092Z",
         "important": false
     },
 
     {
-        "id": 2,
+        "id": 3,
         "content": "Terminar App de Technoterra",
         "date": "2024-09-10T20:00:00.091Z",
         "important": false
@@ -87,6 +89,34 @@ app.delete('/api/notes/:id', (request, response) => {
 
     console.log(notes)
 })
+
+// crear nota
+app.post('/api/notes', (request, response) => {
+    const note = request.body
+
+    if(!note || !note.content) {
+        response.status(400).json({
+            error: '[!] Note Content is Missing'            
+        })
+    }
+
+    const ids = notes.map(note => note.id) // recuperar solo las ids de los obj
+    const maxId = Math.max(...ids) // encontrar la maxima id
+
+    // añadir nota al array
+    const newNote = {
+        id: maxId + 1, // la nueva id sera 1 más que la idMaxima del array
+        content: note.content,
+        date: new Date().toISOString(),
+        important: typeof note.important !== 'undefined' ? note.important : false // si el note.important es 'undefined' entonces important = false ; sino, important : note.important
+    }
+
+    notes = notes.concat(newNote) // añadir nueva nota al final
+    response.json(newNote)
+
+
+})
+
 
 
 const PORT = 3001 // especificamos puerto
