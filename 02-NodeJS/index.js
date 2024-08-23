@@ -49,7 +49,7 @@ const app = http.createServer((request, response) => {
 
 // respuesta para la ruta /
 app.get('/', (request, response) => { // esto se ejecutara en la url 'localhost:PORT/ '
-    response.send('<h1> Hello World </h1>')
+    response.send('<h1> Welcome </h1><p>Dirigete a /api/notes para ver mas informacion</p>')
 })
 
 
@@ -83,7 +83,7 @@ app.get('/api/notes/:id', (request, response) => { // esto se ejecutara en la ur
 // eliminar nota
 app.delete('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id)
-    note = notes.filter(note => note.id !== id)
+    notes = notes.filter(note => note.id !== id)
 
     response.status(204).end()
 
