@@ -1,17 +1,10 @@
-// Conectando con el archivo
-/*
-console.warn('[!] Ejecutando archivo...')
-
-setTimeout(() => {
-    console.log('[<>] Solicitud completada con éxito. Bienvenido, Sergio!')
-}, 1000)
-*/
-
-
 // code here -----------------------------------------------------------------------------------------------------
 const express = require('express')
+const cors = require('cors')
+
 const app = express()
 
+app.use(cors())
 app.use(express.json()) // usar modulo para las request // middleware -> intercepta la peticion que pasa por tu API
 
 
