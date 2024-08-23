@@ -88,7 +88,7 @@ app.delete('/api/notes/:id', (request, response) => {
     response.status(204).end()
 
     console.log(notes)
-})
+}); 
 
 // crear nota
 app.post('/api/notes', (request, response) => {
