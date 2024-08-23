@@ -53,6 +53,20 @@ app.get('/api/notes', (request, response) => { // esto se ejecutara en la url 'l
     response.json(notes) // directamente escribe las cabeceras de application/json
 })
 
+app.get('/api/notes/:id', (request, response) => { // esto se ejecutara en la url 'localhost:PORT/api/notes'
+    const id = Number(request.params.id) // importante transformar los datos, ya que de lo contrario, todas las request llegaran como 'strings'
+    const exactNote = notes.find(exactNote => exactNote.id === id) // recuperamos la nota con el id === exactNote.id
+
+    // Mandamos nota si la encuentra. Sino, devolvemos un 404
+    if(exactNote) {
+        response.json(exactNote)
+    }
+    else
+    {
+        response.status(404).end()
+    }
+})
+
 
 const PORT = 3001 // especificamos puerto
 app.listen(PORT, () => {
@@ -70,6 +84,9 @@ app.listen(PORT, () => {
 
         > npm install nodemon -D
 
+
+    [-] Lista de los http Status Code
+    https://profitserver.net/knowledge-base/codes_http_error/?gad_source=1&gclid=EAIaIQobChMIhd_uk9WKiAMV-HJBAh2oyzIHEAAYASAAEgJmtPD_BwE
 
 
 */
