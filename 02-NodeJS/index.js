@@ -67,6 +67,15 @@ app.get('/api/notes/:id', (request, response) => { // esto se ejecutara en la ur
     }
 })
 
+app.delete('/api/notes/:id', (request, response) => {
+    const id = Number(request.params.id)
+    note = notes.splice(id - 1, 1)
+
+    response.status(204).end()
+
+    console.log(notes)
+})
+
 
 const PORT = 3001 // especificamos puerto
 app.listen(PORT, () => {
