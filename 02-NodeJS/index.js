@@ -15,21 +15,21 @@ const app = express()
 
 let notes = [
     {
-        "id": 1,
+        "id": 0,
         "content": "Suscribirse a @midudev",
         "date": "2024-08-12T12:18:54.091Z",
         "important": true
     },
 
     {
-        "id": 2,
+        "id": 1,
         "content": "Aprender a crear una API",
         "date": "2024-08-23T09:16:19.092Z",
         "important": false
     },
 
     {
-        "id": 3,
+        "id": 2,
         "content": "Terminar App de Technoterra",
         "date": "2024-09-10T20:00:00.091Z",
         "important": false
@@ -45,14 +45,25 @@ const app = http.createServer((request, response) => {
 }) 
 */
 
+// respuesta para la ruta /
 app.get('/', (request, response) => { // esto se ejecutara en la url 'localhost:PORT/ '
     response.send('<h1> Hello World </h1>')
 })
 
+
+// obtener notas
 app.get('/api/notes', (request, response) => { // esto se ejecutara en la url 'localhost:PORT/api/notes'
-    response.json(notes) // directamente escribe las cabeceras de application/json
+
+    if(notes.length === 0) {
+        response.status(404).end() // si no hay notas, devuelve un 404
+    }
+    else
+    {
+        response.json(notes) // devuelve solo si hay notas
+    }
 })
 
+// obtener nota especifica
 app.get('/api/notes/:id', (request, response) => { // esto se ejecutara en la url 'localhost:PORT/api/notes'
     const id = Number(request.params.id) // importante transformar los datos, ya que de lo contrario, todas las request llegaran como 'strings'
     const exactNote = notes.find(exactNote => exactNote.id === id) // recuperamos la nota con el id === exactNote.id
@@ -67,9 +78,10 @@ app.get('/api/notes/:id', (request, response) => { // esto se ejecutara en la ur
     }
 })
 
+// eliminar nota
 app.delete('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id)
-    note = notes.splice(id - 1, 1)
+    note = notes.filter(note => note.id !== id)
 
     response.status(204).end()
 
